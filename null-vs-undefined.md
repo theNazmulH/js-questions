@@ -69,3 +69,14 @@ console.log(b + 10);   // 10  (null is treated as 0)
 console.log(a == b);   // true
 console.log(a === b);  // false
 ```
+
+## 6. The Null/Undefined Type Paradox
+
+### a. Is undefined a type?
+Yes. undefined itself is a data type. There are 7 primitive types (String, Number, BigInt, Boolean, Undefined, Symbol, and Null) in JavaScript. 
+
+### b. Is null a primitive or non-primitive ( As it is an object )
+* **Technically:** It is a **Primitive**.
+* **The typeof quirk:** `typeof null` returns `"object"`.
+* **The Reason:** This is a legacy bug from JS version 1. Objects were tagged with `0` in memory, and `null` (the null pointer) was also represented as `0`. 
+* **Interview Tip:** Always clarify that while `typeof` says object, `null` is fundamentally a primitive because it is immutable and does not have properties or methods.
