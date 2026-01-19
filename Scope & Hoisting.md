@@ -75,7 +75,7 @@ Lexical scope means that a function can access variables from its parent scope w
 
 ```
 function outer() {
-  let name = "Gemini";
+  let name = "Nazmul";
   function inner() {
     console.log(name); // Accesses 'name' from outer lexical scope
   }
@@ -84,7 +84,7 @@ function outer() {
 ```
 ---
 
-### 8. What is scope chain?
+### 8. What is a scope chain?
 **Answer:**  
 
 When a variable is used in JavaScript, the engine looks up its value in the current scope. If it cannot find it, it looks in the outer scope and continues until it reaches the global scope. This "climbing" of scopes is called the Scope Chain.
@@ -141,29 +141,53 @@ A closure is a function that remembers variables from its lexical scope even aft
 ## 🔹 JavaScript Hoisting – Questions & Answers
 
 ### 16. What is hoisting?
-**Answer:**  
-Hoisting is JavaScript’s behavior of moving declarations to the top of their scope during compilation.
+**Definition:** Hoisting is JavaScript's default behavior of moving declarations to the top. In practice, this means you can sometimes use variables or functions before they are actually declared.
 
+**The Reality:** The code isn't actually "moved." Instead, the JavaScript engine scans the code and loads declarations into memory during the **Creation Phase**, before starting the **Execution Phase**.
 ---
 
 ### 17. Are variables hoisted in JavaScript?
 **Answer:**  
 Yes, but behavior differs:
-- `var` → hoisted and initialized as `undefined`
-- `let` & `const` → hoisted but not initialized
+- `var` → hoisted and initialized as `undefined.`
 
+```javascript
+console.log(name); // Output: undefined
+var name = "Nazmul";
+```
+
+- `let` & `const` → hoisted but not initialized
+```javascript
+console.log(age); // ReferenceError: Cannot access 'age' before initialization
+let age = 25;
+```
 ---
 
 ### 18. Are functions hoisted?
 **Answer:**  
 - **Function declarations** → fully hoisted  
-- **Function expressions** → hoisted like variables
+```
+greet(); // Output: "Hello!"
 
+function greet() {
+  console.log("Hello!");
+}
+```
+
+
+- **Function expressions** → hoisted like variables
+```
+sayHi(); // TypeError: sayHi is not a function
+
+var sayHi = function() {
+  console.log("Hi!");
+};
+```
 ---
 
 ### 19. What is the Temporal Dead Zone (TDZ)?
 **Answer:**  
-The time between entering a block and initializing a `let` or `const` variable, where accessing it throws an error.
+The TDZ is the period between the start of the scope and the point where the variable is declared. If you try to access a `let or const` variable in this zone, JavaScript throws a ReferenceError. This was introduced in ES6 to encourage better coding practices (declaring variables before use).
 
 ---
 
@@ -193,7 +217,7 @@ Yes, but it stays in the Temporal Dead Zone until initialized.
 
 ### 24. Can `const` variables be hoisted and used?
 **Answer:**  
-They are hoisted but cannot be accessed before declaration.
+They are hoisted but cannot be accessed before the declaration.
 
 ---
 
@@ -210,7 +234,7 @@ They are hoisted but cannot be accessed before declaration.
 
 ### 26. What is function hoisting?
 **Answer:**  
-Function declarations are hoisted with their full definition.
+Function declarations are hoisted to the top with their full definitions.
 
 ---
 
@@ -234,9 +258,23 @@ No. Only declarations are hoisted, not initializations.
 
 ### 30. How to avoid hoisting-related bugs?
 **Answer:**  
-- Use `let` and `const`
+- Use `let` and `const.`
 - Declare variables at the top
 - Avoid `var`
 - Enable strict mode
 
+---
+
+---
+### 31. Hoisting Priority: What happens if a variable and a function have the same name?" 
+**Answer:**  Functions are hoisted before variables.
+
+```
+console.log(typeof myItem); // "function"
+
+var myItem = "Desktop";
+function myItem() {
+  return "I am a function";
+}
+```
 ---
