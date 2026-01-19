@@ -23,17 +23,39 @@ Scope determines where variables, functions, and objects are accessible in your 
 **Answer:**  
 Variables declared outside any function or block are in the global scope and can be accessed from anywhere in the program.
 
+* **Risk:** Global variables can lead to "namespace pollution," where different parts of a program accidentally overwrite each other's data.
 ---
 
-### 4. What is function scope?
+### 4. What is a function (Local) scope?
 **Answer:**  
 Variables declared with `var` inside a function are accessible only within that function.
 
+```javascript
+function sayHello() {
+  let message = "Hi!"; // Local Scope
+}
+console.log(message); // ReferenceError: message is not defined
+```
 ---
 
 ### 5. What is block scope?
 **Answer:**  
 Variables declared with `let` and `const` inside `{}` are only accessible within that block.
+
+**Block:**
+Any code between { } (if statements, loops, switch, etc.).
+
+**Behavior:**
+var does not recognize block scope; let and const do.
+
+```
+{
+  var x = 1;
+  let y = 2;
+}
+console.log(x); // 1
+console.log(y); // ReferenceError: y is not defined
+```
 
 ---
 
@@ -44,14 +66,29 @@ No. `var` is function-scoped, not block-scoped.
 ---
 
 ### 7. What is lexical scope?
+
+**Concept:** 
+JavaScript uses Lexical Scoping (also called Static Scoping). This means that the scope of a variable is determined by its position within the source code (at write-time), not where it is called (at run-time).
+
 **Answer:**  
 Lexical scope means that a function can access variables from its parent scope where it was defined.
 
+```
+function outer() {
+  let name = "Gemini";
+  function inner() {
+    console.log(name); // Accesses 'name' from outer lexical scope
+  }
+  inner();
+}
+```
 ---
 
 ### 8. What is scope chain?
 **Answer:**  
-Scope chain is the process by which JavaScript looks for variables:  
+
+When a variable is used in JavaScript, the engine looks up its value in the current scope. If it cannot find it, it looks in the outer scope and continues until it reaches the global scope. This "climbing" of scopes is called the Scope Chain.
+
 Current scope → Parent scope → Global scope.
 
 ---
